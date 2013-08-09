@@ -10,3 +10,10 @@ T gcd(T m, T n)
   }
   return n;
 }
+
+
+template <typename T>
+T lcm(T const& a, T const& b)
+{
+  return (a*b)/gcd(a,b);
+}
