@@ -23,7 +23,7 @@ std::size_t levenshtein(Iter1 first1, Iter1 last1, Iter2 first2, Iter2 last2)
   const difference_type length1 = std::distance(first1, last1);
   const difference_type length2 = std::distance(first2, last2);
 
-  std::vector<std::size_t> row(length1 + 1);
+  std::vector<std::size_t> row(length2 + 1);
 
   // Initialize the first row of the table.
   for (std::size_t i = 0; i <= length2; ++i)
