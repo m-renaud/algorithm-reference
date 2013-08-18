@@ -5,8 +5,25 @@
 
 // Maximum value contiguous subsequence.
 //
-// Given a sequence denoted by [begin,end), find the subsequenc
-// that has the "maximum" value as determined by the comparator.
+// Given a sequence denoted by [begin,end), find the contiguous
+// subsequence that has the "maximum" value as determined by the
+// comparator (std::greater by default).
+//
+// For example, given the sequence: [-10, 3, -14, 8, 1, -2 5 ]
+// The maximum range is [ 8, 1, -2, 5 ] with a value of 12.
+//
+// Algorithm:
+//
+//   1) The first element is the maximum range.
+//
+//   2) For each element x:
+//
+//     a) Determine if appending x to the current sequence S is better
+//        than starting a new sequence containing only x.
+//
+//     b) If the current sequence has a larger sum than the current maximum,
+//        update the current maximum.
+//
 
 template <
 	typename Iter,
@@ -20,14 +37,8 @@ auto maximum_contiguous_subsequence(Iter begin, Iter end, Comp comp = Comp())
 	if (begin == end)
 		return std::make_pair(begin, end);
 
-	// Iterators to denote the begin and end of the range of
-	// maximum subsequence.
+	// Range to store the begin and end of the maximum subsequence.
 	std::pair<Iter, Iter> range = std::make_pair(begin, std::next(begin));
-
-	Iter range_begin = begin;
-	Iter range_end = std::next(begin);
-
-	// The maximum value is the first element to start.
 	value_type max_value = *begin;
 
 	Iter current_begin = begin;
