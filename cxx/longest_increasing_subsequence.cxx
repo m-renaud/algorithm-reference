@@ -1,3 +1,12 @@
+// Longest Increasing Subsequence
+
+
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// Find the longest increasing subsequence (l) given a sequence (m).
+//
+// Complexity:
+//   Time: O(n log n)
+//   Space: O(l)
 template <typename Iter>
 std::size_t longest_increasing_sequence_set(Iter first, Iter last)
 {

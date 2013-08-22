@@ -6,6 +6,12 @@
 
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// Find the longest common subsequence (l) of 2 sequences n and m.
+// Return one of the longest subsequences.
+//
+// Complexity:
+//   Time: O(nm) + O(l) = O(nm)
+//   Space: O(nm)
 template <
   typename Iter1, typename Iter2,
   template <typename...> class Container = std::vector
@@ -27,11 +33,9 @@ Container<typename Iter1::value_type> longest_common_subsequence(
     std::vector<int>(n + 1, 0)
   );
 
-  Iter2 y;
-
   for (int i = 1; i < m + 1; ++first1, ++i)
   {
-    y = first2;
+	  Iter2 y = first2;
 
     for (int j = 1; j < n + 1; ++y, ++j)
     {
@@ -85,6 +89,7 @@ Container<typename Iter1::value_type> longest_common_subsequence(
 
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// Find the longest common subsequence of 3 sequences.
 template <typename Iter1, typename Iter2, typename Iter3>
 int longest_common_subsequence(
   Iter1 first1, Iter1 last1,
