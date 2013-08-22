@@ -89,6 +89,70 @@ Container<typename Iter1::value_type> longest_common_subsequence(
 
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// Find the length of the longest common subsequence (l), using less memory.
+//
+// Complexity:
+//   Time: O(nm)
+//   Space: O(n)
+template <
+  typename Iter1, typename Iter2,
+  template <typename...> class Container = std::vector
+>
+std::size_t longest_common_subsequence_space_optimization(
+  Iter1 first1, Iter1 last1, Iter2 first2, Iter2 last2)
+{
+  using value_type = typename Iter1::value_type;
+
+  int m = std::distance(first1, last1);
+  int n = std::distance(first2, last2);
+
+  // If a sequence is empty, return zero
+  if (m == 0 || n == 0)
+	  return 0;
+
+  // Reduce space as much as possible.
+  if (m < n)
+  {
+	  return longest_common_subsequence_space_optimization(
+		  first2, last2, first1, last1
+	  );
+  }
+
+  // Because we are only using a 1D array, we have to store the corner.
+  std::vector<int> table(n + 1, 0);
+
+  for (; first1 != last1; ++first1)
+  {
+	  Iter2 y = first2;
+	  int corner = 0;
+
+    for (int j = 1; j < n + 1; ++y, ++j)
+    {
+	    if (*first1 == *y)
+	    {
+		    auto new_val = corner + 1;
+		    corner = table[j];
+		    table[j] = new_val;
+	    }
+	    else
+	    {
+		    auto new_val = std::max(table[j-1], table[j]);
+		    corner = table[j];
+		    table[j] = new_val;
+	    }
+    }
+
+    for (auto x : table)
+	    std::cout << x << " ";
+    endl(std::cout);
+  }
+
+
+  return table[n];
+}
+
+
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // Find the longest common subsequence of 3 sequences.
 template <typename Iter1, typename Iter2, typename Iter3>
 int longest_common_subsequence(
@@ -158,6 +222,11 @@ int main()
 
     for (auto const& x : lcs)
       std::cout << x;
+    endl(std::cout);
+
+    std::cout << "Length: " << longest_common_subsequence_space_optimization(
+	    s1.begin(), s1.end(), s2.begin(), s2.end()
+    );
     endl(std::cout);
   }
 }
