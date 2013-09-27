@@ -9,7 +9,7 @@
 template <typename T>
 T square(T const& x)
 {
-  return x * x;
+	return x * x;
 }
 
 
@@ -17,7 +17,7 @@ T square(T const& x)
 template<typename T>
 double dist(std::pair<T,T> const& p1, std::pair<T,T> const& p2)
 {
-  return sqrt(square(p2.first - p1.first) + square(p2.second - p1.second));
+	return sqrt(square(p2.first - p1.first) + square(p2.second - p1.second));
 }
 
 

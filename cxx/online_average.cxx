@@ -19,17 +19,17 @@
 template <typename T, typename Count>
 T online_avg(T M, T const& x, Count k)
 {
-  return M += (x - M) / k;
+	return M += (x - M) / k;
 }
 
 int main()
 {
-  int count = 1;
-  double avg = 0;
+	int count = 1;
+	double avg = 0;
 
-  for (double val; std::cin >> val; )
-  {
-    avg = online_avg(avg, val, count++);
-    std::cout << "Average: " << avg << std::endl;
-  }
+	for (double val; std::cin >> val; )
+	{
+		avg = online_avg(avg, val, count++);
+		std::cout << "Average: " << avg << std::endl;
+	}
 }

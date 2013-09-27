@@ -10,29 +10,30 @@
 //
 struct pop
 {
-  unsigned operator()(unsigned n)
-  {
-    static std::unordered_map<unsigned,unsigned> cache;
+	unsigned operator()(unsigned n)
+	{
+		static std::unordered_map<unsigned,unsigned> cache;
 
-    auto iter = cache.find(n);
-    if(iter != end(cache))
-      return iter->second;
+		auto iter = cache.find(n);
+		if (iter != end(cache))
+			return iter->second;
 
-    unsigned count = 0;
-    for(; n; ++count)
-      n &= n-1;
-    cache[n] = count;
-    return count;
-  }
+		unsigned count = 0;
+		for (; n; ++count)
+			n &= n-1;
+		cache[n] = count;
+
+		return count;
+	}
 
 };
 
 
 int main()
 {
-  pop bit_counter;
-  unsigned n;
-  std::cout << "Enter an integer: " ;
-  std::cin >> n;
-  std::cout << bit_counter(n) << std::endl;
+	pop bit_counter;
+	unsigned n;
+	std::cout << "Enter an integer: " ;
+	std::cin >> n;
+	std::cout << bit_counter(n) << std::endl;
 }

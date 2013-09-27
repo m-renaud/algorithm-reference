@@ -10,29 +10,29 @@
 template <typename Iter>
 Iter remove_duplicates(Iter first, Iter last)
 {
-  if(first == last)
-    return last;
+	if (first == last)
+		return last;
 
-  Iter prev, new_last;
+	Iter prev, new_last;
 
-  prev = first;
-  std::advance(first,1);
-  new_last = first;
+	prev = first;
+	std::advance(first,1);
+	new_last = first;
 
-  for(; first != last; ++first, ++prev)
-    if(*first != *prev)
-      *new_last++ = *first;
+	for (; first != last; ++first, ++prev)
+		if (*first != *prev)
+			*new_last++ = *first;
 
-  return new_last;
+	return new_last;
 }
 
 int main()
 {
-  std::forward_list<int> numbers = {1,2,3,3,4,4,5,6,6,6,7,7};
+	std::forward_list<int> numbers = {1,2,3,3,4,4,5,6,6,6,7,7};
 
-  auto e = remove_duplicates(numbers.begin(), numbers.end());
-  for (auto i = numbers.begin(); i != e; ++i)
-    std::cout << *i << ((std::next(i) != e) ? ", " : "\n");
+	auto e = remove_duplicates(numbers.begin(), numbers.end());
+	for (auto i = numbers.begin(); i != e; ++i)
+		std::cout << *i << ((std::next(i) != e) ? ", " : "\n");
 
-  return 0;
+	return 0;
 }
